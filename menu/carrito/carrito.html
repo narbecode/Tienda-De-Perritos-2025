@@ -1,11 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Tienda de Perritos</title>
   <link rel="stylesheet" href="css/estilo.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+
 <body>
+
+  <div class="auth-bar"
+    style="position: absolute; top: 20px; right: 20px; z-index: 10; font-family: 'Open Sans', sans-serif;">
+    <button id="btn-mostrar-login"
+      style="padding: 10px 20px; background: #1d1df6; color: white; border: 2px solid white; border-radius: 8px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+      🔑 Iniciar Sesión / Registrarse
+    </button>
+    <div id="usuario-perfil"
+      style="display: none; align-items: center; gap: 12px; background: rgba(255,255,255,0.25); padding: 8px 18px; border-radius: 20px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.4);">
+      <span id="usuario-email"
+        style="color: white; font-weight: bold; font-size: 14px; text-shadow: 1px 1px 2px black;">👤
+        correo@ejemplo.com</span>
+      <button id="btn-cerrar-sesion"
+        style="padding: 5px 10px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: bold;">Salir</button>
+    </div>
+  </div>
+
   <div id="kiko-slider">
     <ul class="slider">
       <li id="slider1"><img src="img/1.png" alt=""></li>
@@ -34,7 +57,6 @@
   <h1>Tienda de Perritos</h1>
   <section class="contenedor">
     <div class="contenedor-items">
-      <!-- Repite este bloque .item cambiando src y data-hover -->
       <div class="item">
         <span class="titulo-item">Bichon</span>
         <img src="img/perrito 1.png" data-hover="img/d1.png" class="img-item" alt="">
@@ -107,6 +129,36 @@
     </div>
   </section>
 
+  <div id="modal-login"
+    style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); z-index: 100; justify-content: center; align-items: center; font-family: 'Open Sans', sans-serif;">
+    <div
+      style="background: white; padding: 35px; border-radius: 15px; width: 350px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative;">
+      <h3 id="modal-titulo"
+        style="margin-bottom: 20px; color: #1d1df6; font-size: 24px; font-weight: bold; text-align: center;">Ingresar a
+        la Tienda</h3>
+
+      <input type="email" id="auth-email" placeholder="Correo Electrónico"
+        style="width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; box-sizing: border-box;">
+      <input type="password" id="auth-password" placeholder="Contraseña (Mín. 6 caracteres)"
+        style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; box-sizing: border-box;">
+
+      <button id="btn-auth-principal"
+        style="width: 100%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px; margin-bottom: 12px; transition: background 0.2s;">Iniciar
+        Sesión</button>
+
+      <p style="font-size: 13px; color: #666; text-align: center; margin-bottom: 20px;">
+        <span id="texto-alternar">¿No tienes cuenta?</span>
+        <a href="#" id="enlace-alternar" style="color: #4742e0; font-weight: bold; text-decoration: none;">Regístrate
+          aquí</a>
+      </p>
+
+      <button id="btn-cancelar-login"
+        style="width: 100%; padding: 8px; background: #7f8c8d; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 14px;">Volver
+        a la Tienda</button>
+    </div>
+  </div>
+
   <script src="js/app.js" defer></script>
 </body>
+
 </html>
